@@ -106,6 +106,6 @@ df = df.repartition('ts')
 ## maxRecordsPerFile is recommended over the old method of using coalesce()
 df.write \
   .option('maxRecordsPerFile', 1000) \ 
-  .partitionBy('year', 'month') \
+  .partitionBy('year', 'month', 'smiling') \
   .mode('overwrite') \
   .parquet('s3://bucket/prefix')
