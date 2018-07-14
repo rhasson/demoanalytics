@@ -30,7 +30,7 @@ exports.handler = (event, context, callback) => {
     function DetectFaces (file) {
         return new Promise((resolve, reject) => {
             console.log('Detecting Faces for ', file.key)
-            FaceAttributes = ['AgeRange', 'Smile', 'Eyeglasses', 'Sunglasses', 'Gender', 'Beard', 'Mustache', 'EyesOpen', 'Emotions']
+            let FaceAttributes = ['ALL']
             let params = { Image: { S3Object: { Bucket: file.bucket, Name: file.key } }, Attributes: FaceAttributes }
             Rek.detectFaces(params, (err, data) => {
                 if (err) return reject(err)
@@ -84,7 +84,7 @@ exports.handler = (event, context, callback) => {
         return FirehosePut(params)
     })
     .then((fh) => {
-        console.log('Pushed to Firehose, closing up...')
+        console.log('Finished pushing to Firehose, closing up...')
         callback(null, {  })
     })
     .catch((err) => { 
