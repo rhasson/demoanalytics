@@ -100,8 +100,6 @@ exports.handler = (event, context, callback) => {
     describe_delivery_stream(event.deliveryStreamArn)
     .then((params) => { return get_partition_spec(params) })
     .then((spec) => { return add_partition(spec) })
-    //.then(() => { return prep_records(event) })
-    //.then((records) => { callback(null, { records: records }) })
     .catch((err) => { console.log(err) })
     
     const output = event.records.map((record) => {
