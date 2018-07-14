@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="css/index.css">
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div><video ref="video" id="video" width="100%" autoplay playsinline></video></div>
+            <div><button id="snap" v-on:click="capture()">Snap Photo</button></div>
+            <canvas ref="canvas" id="canvas" width="640" height="480"></canvas>
+            <ul>
+                <li v-for="c in captures"><img v-bind:src="c.src" height="50" /></li>
+            </ul>
+        </div>
+        <script src="https://sdk.amazonaws.com/js/aws-sdk-2.270.1.min.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
