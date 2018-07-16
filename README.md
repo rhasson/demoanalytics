@@ -3,7 +3,7 @@ This repo contains different components of a demo analytics application that can
 
 ## Architecture
 
-Mobile App --[picture]--> S3 --> Lambda (Rekognition) --> Kinesis Data Firehose --> S3 --> Athena
+Mobile App --[selfie]--> S3 --> Lambda (Rekognition) --> Kinesis Data Firehose --> S3 --> Athena
 
 ## Parts
 There are 4 folders in this repo.
