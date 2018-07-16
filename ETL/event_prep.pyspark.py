@@ -95,8 +95,7 @@ df = src \
 .drop('ts') \
 .withColumnRenamed('n_ts', 'ts') \
 .withColumn('year', F.year('ts')) \
-.withColumn('month', F.month('ts')) \
-.withColumn('smiling', src.smile.value)
+.withColumn('month', F.month('ts'))
 
 ## Sometimes we need to distribute the data based on a specific column, higher cardinality is better.
 ## To see the number of spark partitions being used: df.rdd.getNumPartitions()
@@ -104,8 +103,10 @@ df = df.repartition('ts')
 
 ## Finally write the data back out to S3 in partitioned Parquet format
 ## maxRecordsPerFile is recommended over the old method of using coalesce()
-df.write \
-  .option('maxRecordsPerFile', 1000) \ 
+df \
+  .withColumn('smiling', df.smile.value) \
+  .write \
+  .option('maxRecordsPerFile', 1000) \
   .partitionBy('year', 'month', 'smiling') \
   .mode('overwrite') \
   .parquet('s3://bucket/prefix')

@@ -109,3 +109,11 @@ FROM "analyticsapp"."final_table"
 WHERE 
   agerange['high'] <=40 AND agerange['low'] >= 20
   AND eyeglasses['value'] = 'true' AND CAST(eyeglasses['confidence'] AS double) > 75.00
+
+
+/**
+* Find events from the last day
+**/
+
+SELECT * FROM "analyticsapp"."final_table"
+WHERE current_timestamp - interval '1' day < from_iso8601_timestamp(ts)
